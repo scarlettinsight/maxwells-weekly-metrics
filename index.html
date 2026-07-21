@@ -1,0 +1,233 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maxwell's Burgers & Shakes — Weekly Scorecard</title>
+<style>
+:root{--hunt:#2F4734;--ox:#6B2227;--gold:#B08D2B;--parch:#F4EEE1;
+  --ink:#1E1E1E;--line:#d8cdb6;--card:#fbf7ee;--muted:#6f6a5c;--alt:#f3ede0;
+  --up:#1a6b3a;--dn:#8b1a1a;--neu:#5a5246;--r:10px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--parch);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:14px;line-height:1.45;padding-bottom:60px}
+h1,h2,h3{font-family:Georgia,serif}
+.top{background:var(--hunt);padding:16px 20px 14px}
+.top b{font-family:Georgia;font-size:20px;color:#fff;display:block}
+.top .sub{font-size:12px;color:#adc4ad;margin-top:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px}
+h2.sec{font-size:19px;color:var(--hunt);border-bottom:2px solid var(--gold);
+  padding-bottom:6px;margin:24px 0 6px}
+.lede{color:var(--muted);font-size:13px;margin:4px 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.07)}
+.card-title{font-family:Georgia;font-size:14px;font-weight:700;color:var(--hunt);margin:0 0 12px}
+.note{background:#fff6ec;border:1px solid var(--gold);border-left:4px solid var(--hunt);
+  padding:9px 13px;font-size:13px;color:#4a463c;border-radius:0 var(--r) var(--r) 0;margin:10px 0}
+.note a{color:var(--hunt)}
+.loading{text-align:center;padding:60px 20px;color:var(--muted);font-size:15px}
+.loading .spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--hunt);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);
+  border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+.ctrl label{font-size:12px;font-weight:700;color:var(--muted)}
+.sc-table{width:100%;border-collapse:collapse;font-size:13px}
+.sc-table th{background:var(--hunt);color:#f3efe3;padding:8px 10px;
+  text-align:center;font-size:11.5px;font-weight:600;white-space:nowrap;position:sticky;top:0}
+.sc-table th:first-child{text-align:left;min-width:190px}
+.sc-table td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:center}
+.sc-table td:first-child{text-align:left;font-weight:600}
+.sc-table tr:nth-child(even) td{background:var(--alt)}
+.sc-grouprow td{background:var(--hunt)!important;color:var(--gold);
+  font-family:Georgia;font-weight:700;font-size:11px;text-transform:uppercase;
+  letter-spacing:.5px;text-align:left;padding:5px 10px}
+.d-up{color:var(--up);font-weight:700}
+.d-dn{color:var(--dn);font-weight:700}
+.d-neu{color:var(--neu)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;flex-shrink:0}
+.metric-row{display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid var(--line);font-size:12.5px;gap:8px}
+.metric-row:last-child{border:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+svg{display:block;overflow:visible}
+.hist-table{border-collapse:collapse;font-size:11.5px}
+.hist-table td,.hist-table th{padding:5px 7px;border:1px solid var(--line);text-align:center}
+.hist-table th{background:var(--hunt);color:#fff;font-size:10.5px}
+@media(max-width:640px){.two{grid-template-columns:1fr}.sc-table{font-size:11.5px}}
+</style>
+
+<div class="top">
+  <b>Maxwell's Burgers & Shakes — Weekly Scorecard</b>
+  <div class="sub">Jul 2025–Jun 2026 baseline · 25 metrics · Updated weekly</div>
+</div>
+
+<div class="wrap">
+  <div id="root"><div class="loading"><div class="spinner"></div>Loading scorecard data…</div></div>
+</div>
+
+<script>window.__BL__={"annual":{"n":33214,"net":941891.14,"avg_check":28.36,"dinner_avg":29.17,"lunch_avg":27.4,"dinner_n":17972,"lunch_n":15242,"food_pct":95.7,"wine_pct":0.2,"liq_pct":1.4,"beer_pct":1.6,"na_pct":0.0,"burger":69.8,"shake":28.7,"side":17.8,"hotdog":9.7,"nuggets":6.0,"kids":11.9,"softdrink":21.8,"alcohol_any":9.8,"beer_any":6.6,"cocktail":3.2,"total_covers":37354,"avg_party":1.11,"net_per_guest":25.41},"by_season":{"Summer":{"n":8824,"net":254105.15,"avg_check":28.8,"dinner_avg":29.52,"lunch_avg":27.97,"dinner_n":4700,"lunch_n":4124,"food_pct":96.8,"wine_pct":0.2,"liq_pct":1.3,"beer_pct":1.5,"na_pct":0.0,"burger":69.7,"shake":30.9,"side":17.5,"hotdog":8.8,"nuggets":6.9,"kids":12.7,"softdrink":22.6,"alcohol_any":9.0,"beer_any":6.3,"cocktail":2.5,"total_covers":9692,"avg_party":1.08,"net_per_guest":26.19},"Fall":{"n":7881,"net":227224.26,"avg_check":28.83,"dinner_avg":29.63,"lunch_avg":27.95,"dinner_n":4147,"lunch_n":3734,"food_pct":93.5,"wine_pct":0.2,"liq_pct":1.6,"beer_pct":1.8,"na_pct":0.0,"burger":69.3,"shake":26.6,"side":17.7,"hotdog":9.1,"nuggets":6.5,"kids":11.7,"softdrink":20.9,"alcohol_any":11.0,"beer_any":7.3,"cocktail":3.7,"total_covers":8143,"avg_party":1.01,"net_per_guest":28.04},"Winter":{"n":7883,"net":221698.34,"avg_check":28.12,"dinner_avg":29.42,"lunch_avg":26.51,"dinner_n":4367,"lunch_n":3516,"food_pct":95.4,"wine_pct":0.3,"liq_pct":1.7,"beer_pct":1.8,"na_pct":0.0,"burger":70.3,"shake":26.0,"side":18.2,"hotdog":10.4,"nuggets":5.0,"kids":12.4,"softdrink":21.4,"alcohol_any":10.7,"beer_any":6.9,"cocktail":3.7,"total_covers":8779,"avg_party":1.09,"net_per_guest":25.65},"Spring":{"n":8626,"net":238863.38,"avg_check":27.69,"dinner_avg":28.2,"lunch_avg":27.07,"dinner_n":4758,"lunch_n":3868,"food_pct":96.8,"wine_pct":0.2,"liq_pct":1.0,"beer_pct":1.6,"na_pct":0.0,"burger":70.1,"shake":30.5,"side":17.8,"hotdog":10.6,"nuggets":5.6,"kids":10.9,"softdrink":22.2,"alcohol_any":8.8,"beer_any":5.9,"cocktail":2.8,"total_covers":10740,"avg_party":1.23,"net_per_guest":22.51}},"by_day":{"Tue":{"avg_check":25.72},"Wed":{"avg_check":26.07},"Thu":{"avg_check":26.8},"Fri":{"avg_check":29.08},"Sat":{"avg_check":30.14},"Sun":{"avg_check":30.54}},"meta":{"venue":"Maxwell's Burgers & Shakes \u2014 Weekly Scorecard","concept":"counter","annual_window":"2025-07..2026-06","total_weeks":58,"metric_count":25}};window.__HI__=[{"n":680,"net":19063.6,"avg_check":28.03,"dinner_avg":27.62,"lunch_avg":28.46,"dinner_n":342,"lunch_n":338,"food_pct":98.4,"wine_pct":0.0,"liq_pct":0.4,"beer_pct":1.2,"na_pct":0.0,"burger":67.7,"shake":37.2,"side":18.6,"hotdog":9.1,"nuggets":3.6,"kids":15.3,"softdrink":22.6,"alcohol_any":5.5,"beer_any":4.5,"cocktail":1.0,"date_range":"2026-06-15 \u2013 2026-06-21","week_key":"2026-W25","season":"Summer","exact_net":19303.73,"exact_orders":690,"exact_guests":811,"exact_avg":27.98,"total_covers":811,"avg_party":1.18,"net_per_guest":23.8,"same_week_ly":"2025-W25","comparisons":{"avg_check":{"this":28.03,"ly":30.69,"season_bl":28.8,"annual_bl":28.36,"fmt":"$","delta_ly":"-$2.66","delta_season":"-$0.77","delta_annual":"-$0.33"},"dinner_avg":{"this":27.62,"ly":31.24,"season_bl":29.52,"annual_bl":29.17,"fmt":"$","delta_ly":"-$3.62","delta_season":"-$1.90","delta_annual":"-$1.55"},"lunch_avg":{"this":28.46,"ly":30.05,"season_bl":27.97,"annual_bl":27.4,"fmt":"$","delta_ly":"-$1.59","delta_season":"+$0.49","delta_annual":"+$1.06"},"net":{"this":19063.6,"ly":21481.88,"season_bl":254105.15,"annual_bl":941891.14,"fmt":"$","delta_ly":"-$2418.28","delta_season":"-$235041.55","delta_annual":"-$922827.54"},"n":{"this":680,"ly":700,"season_bl":8824,"annual_bl":33214,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"dinner_n":{"this":342,"ly":376,"season_bl":4700,"annual_bl":17972,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"lunch_n":{"this":338,"ly":324,"season_bl":4124,"annual_bl":15242,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"total_covers":{"this":811,"ly":723,"season_bl":9692,"annual_bl":37354,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"avg_party":{"this":1.18,"ly":1.01,"season_bl":1.08,"annual_bl":1.11,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"net_per_guest":{"this":23.8,"ly":29.93,"season_bl":26.19,"annual_bl":25.41,"fmt":"$","delta_ly":"-$6.13","delta_season":"-$2.39","delta_annual":"-$1.61"},"food_pct":{"this":98.4,"ly":96.7,"season_bl":96.8,"annual_bl":95.7,"fmt":"%","delta_ly":"+1.7pp","delta_season":"+1.6pp","delta_annual":"+2.7pp"},"wine_pct":{"this":0.0,"ly":0.4,"season_bl":0.2,"annual_bl":0.2,"fmt":"%","delta_ly":"-0.4pp","delta_season":"-0.2pp","delta_annual":"-0.2pp"},"liq_pct":{"this":0.4,"ly":1.7,"season_bl":1.3,"annual_bl":1.4,"fmt":"%","delta_ly":"-1.3pp","delta_season":"-0.9pp","delta_annual":"-1.0pp"},"beer_pct":{"this":1.2,"ly":1.1,"season_bl":1.5,"annual_bl":1.6,"fmt":"%","delta_ly":"+0.1pp","delta_season":"-0.3pp","delta_annual":"-0.4pp"},"na_pct":{"this":0.0,"ly":0.0,"season_bl":0.0,"annual_bl":0.0,"fmt":"%","delta_ly":"+0.0pp","delta_season":"+0.0pp","delta_annual":"+0.0pp"},"burger":{"this":67.7,"ly":70.1,"season_bl":69.7,"annual_bl":69.8,"fmt":"%","delta_ly":"-2.4pp","delta_season":"-2.0pp","delta_annual":"-2.1pp"},"shake":{"this":37.2,"ly":35.4,"season_bl":30.9,"annual_bl":28.7,"fmt":"%","delta_ly":"+1.8pp","delta_season":"+6.3pp","delta_annual":"+8.5pp"},"side":{"this":18.6,"ly":17.4,"season_bl":17.5,"annual_bl":17.8,"fmt":"%","delta_ly":"+1.2pp","delta_season":"+1.1pp","delta_annual":"+0.8pp"},"hotdog":{"this":9.1,"ly":8.1,"season_bl":8.8,"annual_bl":9.7,"fmt":"%","delta_ly":"+1.0pp","delta_season":"+0.3pp","delta_annual":"-0.6pp"},"nuggets":{"this":3.6,"ly":8.0,"season_bl":6.9,"annual_bl":6.0,"fmt":"%","delta_ly":"-4.4pp","delta_season":"-3.3pp","delta_annual":"-2.4pp"},"kids":{"this":15.3,"ly":13.1,"season_bl":12.7,"annual_bl":11.9,"fmt":"%","delta_ly":"+2.2pp","delta_season":"+2.6pp","delta_annual":"+3.4pp"},"softdrink":{"this":22.6,"ly":21.7,"season_bl":22.6,"annual_bl":21.8,"fmt":"%","delta_ly":"+0.9pp","delta_season":"+0.0pp","delta_annual":"+0.8pp"},"alcohol_any":{"this":5.5,"ly":9.3,"season_bl":9.0,"annual_bl":9.8,"fmt":"%","delta_ly":"-3.8pp","delta_season":"-3.5pp","delta_annual":"-4.3pp"},"beer_any":{"this":4.5,"ly":4.6,"season_bl":6.3,"annual_bl":6.6,"fmt":"%","delta_ly":"-0.1pp","delta_season":"-1.8pp","delta_annual":"-2.1pp"},"cocktail":{"this":1.0,"ly":3.9,"season_bl":2.5,"annual_bl":3.2,"fmt":"%","delta_ly":"-2.9pp","delta_season":"-1.5pp","delta_annual":"-2.2pp"}}},{"n":673,"net":17976.62,"avg_check":26.71,"dinner_avg":27.4,"lunch_avg":25.87,"dinner_n":371,"lunch_n":302,"food_pct":97.1,"wine_pct":0.0,"liq_pct":1.4,"beer_pct":1.5,"na_pct":0.0,"burger":68.8,"shake":31.1,"side":16.9,"hotdog":10.0,"nuggets":6.9,"kids":12.0,"softdrink":10.5,"alcohol_any":8.8,"beer_any":5.5,"cocktail":3.3,"date_range":"2026-06-22 \u2013 2026-06-28","week_key":"2026-W26","season":"Summer","exact_net":18340.81,"exact_orders":677,"exact_guests":781,"exact_avg":27.09,"total_covers":781,"avg_party":1.15,"net_per_guest":23.48,"same_week_ly":"2025-W26","comparisons":{"avg_check":{"this":26.71,"ly":27.13,"season_bl":28.8,"annual_bl":28.36,"fmt":"$","delta_ly":"-$0.42","delta_season":"-$2.09","delta_annual":"-$1.65"},"dinner_avg":{"this":27.4,"ly":27.3,"season_bl":29.52,"annual_bl":29.17,"fmt":"$","delta_ly":"+$0.10","delta_season":"-$2.12","delta_annual":"-$1.77"},"lunch_avg":{"this":25.87,"ly":26.9,"season_bl":27.97,"annual_bl":27.4,"fmt":"$","delta_ly":"-$1.03","delta_season":"-$2.10","delta_annual":"-$1.53"},"net":{"this":17976.62,"ly":20269.17,"season_bl":254105.15,"annual_bl":941891.14,"fmt":"$","delta_ly":"-$2292.55","delta_season":"-$236128.53","delta_annual":"-$923914.52"},"n":{"this":673,"ly":747,"season_bl":8824,"annual_bl":33214,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"dinner_n":{"this":371,"ly":431,"season_bl":4700,"annual_bl":17972,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"lunch_n":{"this":302,"ly":316,"season_bl":4124,"annual_bl":15242,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"total_covers":{"this":781,"ly":770,"season_bl":9692,"annual_bl":37354,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"avg_party":{"this":1.15,"ly":1.01,"season_bl":1.08,"annual_bl":1.11,"fmt":"n","delta_ly":null,"delta_season":null,"delta_annual":null},"net_per_guest":{"this":23.48,"ly":26.46,"season_bl":26.19,"annual_bl":25.41,"fmt":"$","delta_ly":"-$2.98","delta_season":"-$2.71","delta_annual":"-$1.93"},"food_pct":{"this":97.1,"ly":96.6,"season_bl":96.8,"annual_bl":95.7,"fmt":"%","delta_ly":"+0.5pp","delta_season":"+0.3pp","delta_annual":"+1.4pp"},"wine_pct":{"this":0.0,"ly":0.4,"season_bl":0.2,"annual_bl":0.2,"fmt":"%","delta_ly":"-0.4pp","delta_season":"-0.2pp","delta_annual":"-0.2pp"},"liq_pct":{"this":1.4,"ly":1.4,"season_bl":1.3,"annual_bl":1.4,"fmt":"%","delta_ly":"+0.0pp","delta_season":"+0.1pp","delta_annual":"+0.0pp"},"beer_pct":{"this":1.5,"ly":1.1,"season_bl":1.5,"annual_bl":1.6,"fmt":"%","delta_ly":"+0.4pp","delta_season":"+0.0pp","delta_annual":"-0.1pp"},"na_pct":{"this":0.0,"ly":0.0,"season_bl":0.0,"annual_bl":0.0,"fmt":"%","delta_ly":"+0.0pp","delta_season":"+0.0pp","delta_annual":"+0.0pp"},"burger":{"this":68.8,"ly":70.3,"season_bl":69.7,"annual_bl":69.8,"fmt":"%","delta_ly":"-1.5pp","delta_season":"-0.9pp","delta_annual":"-1.0pp"},"shake":{"this":31.1,"ly":32.7,"season_bl":30.9,"annual_bl":28.7,"fmt":"%","delta_ly":"-1.6pp","delta_season":"+0.2pp","delta_annual":"+2.4pp"},"side":{"this":16.9,"ly":16.6,"season_bl":17.5,"annual_bl":17.8,"fmt":"%","delta_ly":"+0.3pp","delta_season":"-0.6pp","delta_annual":"-0.9pp"},"hotdog":{"this":10.0,"ly":8.3,"season_bl":8.8,"annual_bl":9.7,"fmt":"%","delta_ly":"+1.7pp","delta_season":"+1.2pp","delta_annual":"+0.3pp"},"nuggets":{"this":6.9,"ly":1.6,"season_bl":6.9,"annual_bl":6.0,"fmt":"%","delta_ly":"+5.3pp","delta_season":"+0.0pp","delta_annual":"+0.9pp"},"kids":{"this":12.0,"ly":14.9,"season_bl":12.7,"annual_bl":11.9,"fmt":"%","delta_ly":"-2.9pp","delta_season":"-0.7pp","delta_annual":"+0.1pp"},"softdrink":{"this":10.5,"ly":22.6,"season_bl":22.6,"annual_bl":21.8,"fmt":"%","delta_ly":"-12.1pp","delta_season":"-12.1pp","delta_annual":"-11.3pp"},"alcohol_any":{"this":8.8,"ly":7.9,"season_bl":9.0,"annual_bl":9.8,"fmt":"%","delta_ly":"+0.9pp","delta_season":"-0.2pp","delta_annual":"-1.0pp"},"beer_any":{"this":5.5,"ly":5.1,"season_bl":6.3,"annual_bl":6.6,"fmt":"%","delta_ly":"+0.4pp","delta_season":"-0.8pp","delta_annual":"-1.1pp"},"cocktail":{"this":3.3,"ly":2.7,"season_bl":2.5,"annual_bl":3.2,"fmt":"%","delta_ly":"+0.6pp","delta_season":"+0.8pp","delta_annual":"+0.1pp"}}}];window.__METS__=[["avg_check","Avg check","$","#2F4734","Revenue"],["dinner_avg","Dinner avg check","$","#2F4734","Revenue"],["lunch_avg","Lunch avg check","$","#3d6a7a","Revenue"],["net","Net sales (modeled)","$","#2F4734","Revenue"],["n","Dine-in checks","n","#9a9584","Revenue"],["dinner_n","Dinner checks","n","#9a9584","Revenue"],["lunch_n","Lunch checks","n","#9a9584","Revenue"],["total_covers","Total covers (guests)","n","#3d6a7a","Covers & size"],["avg_party","Guests per check","n","#3d6a7a","Covers & size"],["net_per_guest","Net sales per guest","$","#2F4734","Covers & size"],["food_pct","Food % of revenue","%","#2F4734","Revenue mix"],["wine_pct","Wine % of revenue","%","#6B2227","Revenue mix"],["liq_pct","Liquor % of revenue","%","#B08D2B","Revenue mix"],["beer_pct","Beer % of revenue","%","#a8632f","Revenue mix"],["na_pct","NA/Zero proof % of rev","%","#6b8e6f","Revenue mix"],["burger","Burger %","%","#2F4734","Composition"],["shake","Shake %","%","#a8632f","Composition"],["side","Side %","%","#6b8e6f","Composition"],["hotdog","Hot dog %","%","#a8632f","Composition"],["nuggets","Nuggets %","%","#B08D2B","Composition"],["kids","Kids meal %","%","#3d6a7a","Composition"],["softdrink","Fountain soda %","%","#6b8e6f","Composition"],["alcohol_any","Any alcohol %","%","#6B2227","Composition"],["beer_any","Beer %","%","#B08D2B","Composition"],["cocktail","Cocktail/spirit %","%","#B08D2B","Composition"]];window.__GROUPS__=[["Revenue",["avg_check","dinner_avg","lunch_avg","net","n","dinner_n","lunch_n"]],["Covers & size",["total_covers","avg_party","net_per_guest"]],["Revenue mix",["food_pct","wine_pct","liq_pct","beer_pct","na_pct"]],["Composition",["burger","shake","side","hotdog","nuggets","kids","softdrink","alcohol_any","beer_any","cocktail"]]];</script>
+<script>
+const METS = window.__METS__;
+const GROUPS = window.__GROUPS__;
+const HUNT="#2F4734",OX="#6B2227",GOLD="#B08D2B",GREY="#9a9584";
+const el=id=>document.getElementById(id);
+
+function fv(v,fmt){
+  if(v==null)return'—';
+  if(fmt==='$')return '$'+parseFloat(v).toFixed(2);
+  if(fmt==='n')return Number.isInteger(v)?String(v):parseFloat(v).toFixed(2);
+  return parseFloat(v).toFixed(1)+'%';
+}
+function dclass(d){if(!d||d==='—')return'd-neu';return (d.startsWith('-'))?'d-dn':'d-up';}
+
+function init(){
+  const BL=window.__BL__, HIST=window.__HI__;
+  const LW=HIST.length?HIST[HIST.length-1]:null;
+
+  el('root').innerHTML=`
+    <div id="banner"></div>
+    <h2 class="sec">Latest Week vs Baselines</h2>
+    <p class="lede">All 36 metrics vs the same week last year, the current season average,
+    and the full Jun 2025–Jun 2026 annual baseline.
+    <b style="color:var(--up)">Green</b> = above baseline · <b style="color:var(--dn)">Red</b> = below.</p>
+    <div class="ctrl"><label>Week:</label><select id="week_sel"></select></div>
+    <div class="card" style="overflow-x:auto" id="sc_table_wrap"></div>
+    <div class="two">
+      <div class="card"><div class="card-title">Top movers vs same week last year</div><div id="ly_mini"></div></div>
+      <div class="card"><div class="card-title" id="seas_title">Top movers vs season baseline</div><div id="seas_mini"></div></div>
+    </div>
+    <h2 class="sec">Trend — Any Metric Over Time</h2>
+    <p class="lede">All ${HIST.length} ingested week(s). Hover a point for details. Gold dashed line = baseline.</p>
+    <div class="ctrl">
+      <label>Metric:</label><select id="trend_met"></select>
+      <label style="margin-left:6px">Baseline:</label>
+      <select id="trend_bl"><option value="annual">Annual baseline</option><option value="season">Season baseline (avg)</option><option value="none">None</option></select>
+    </div>
+    <div class="card"><svg id="trend_svg" viewBox="0 0 900 240" width="100%"></svg>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:8px" id="trend_tip">Hover a point</div></div>
+    <h2 class="sec">Week-by-Week History</h2>
+    <p class="lede">Every ingested week. Darker cell = higher value. Click a cell to load that week above.</p>
+    <div class="ctrl"><label>Metric:</label><select id="hist_met"></select></div>
+    <div class="card" style="overflow-x:auto"><div id="hist_grid"></div></div>
+    <h2 class="sec" style="margin-top:28px">How Updates Work</h2>
+    <div class="card" style="font-size:13px;color:var(--muted)">
+      This dashboard reads its data on every visit. When a new week is ingested and
+      redeployed, everyone with the URL sees it automatically — no new link.</div>`;
+
+  let activeWk=LW;
+  const wsel=el('week_sel');
+  wsel.innerHTML=HIST.map((w,i)=>`<option value="${i}"${i===HIST.length-1?' selected':''}>${w.date_range||w.week_key}</option>`).join('');
+  wsel.onchange=()=>{activeWk=HIST[+wsel.value]; renderAll(activeWk); drawGrid();};
+
+  function renderAll(wk){activeWk=wk;renderBanner(wk);renderTable(wk);
+    renderMini('ly_mini',wk,'delta_ly');renderMini('seas_mini',wk,'delta_season');
+    el('seas_title').textContent='Top movers vs season baseline ('+(wk?wk.season:'—')+')';}
+
+  function renderBanner(wk){
+    if(!wk){el('banner').innerHTML='<div class="note">No weeks ingested yet.</div>';return;}
+    el('banner').innerHTML=`<div class="note"><b>${wk.date_range||wk.week_key}</b> · ${wk.n} checks ·
+      ${wk.net?'$'+(wk.net/1000).toFixed(1)+'K net (modeled)':''} ·
+      Avg check <b>$${wk.avg_check}</b> · Season: ${wk.season} · Same week LY: ${wk.same_week_ly||'—'}</div>`;}
+
+  function renderTable(wk){
+    if(!wk){el('sc_table_wrap').innerHTML='<p style="color:var(--muted);padding:12px">No week loaded.</p>';return;}
+    const cmp=wk.comparisons||{};
+    let t=`<table class="sc-table"><thead><tr><th>Metric</th><th>This week</th>
+      <th>LY same wk<br><span style="font-weight:400;font-size:10px">${wk.same_week_ly||'—'}</span></th>
+      <th>Δ LY</th><th>Season BL</th><th>Δ Season</th><th>Annual BL</th><th>Δ Annual</th></tr></thead><tbody>`;
+    GROUPS.forEach(([gname,keys])=>{
+      const rows=keys.filter(k=>cmp[k]); if(!rows.length)return;
+      t+=`<tr class="sc-grouprow"><td colspan="8">${gname}</td></tr>`;
+      rows.forEach(key=>{
+        const m=METS.find(x=>x[0]===key)||[key,key,'%','#2F4734'];
+        const c=cmp[key]||{}; const fmt=m[2]; const col=m[3];
+        const dly=c.delta_ly,dse=c.delta_season,dann=c.delta_annual;
+        t+=`<tr><td><span class="dot" style="background:${col}"></span>${m[1]}</td>
+          <td><b>${fv(c.this,fmt)}</b></td><td>${fv(c.ly,fmt)}</td>
+          <td class="${dclass(dly)}">${dly||'—'}</td><td>${fv(c.season_bl,fmt)}</td>
+          <td class="${dclass(dse)}">${dse||'—'}</td><td>${fv(c.annual_bl,fmt)}</td>
+          <td class="${dclass(dann)}">${dann||'—'}</td></tr>`;});});
+    el('sc_table_wrap').innerHTML=t+'</tbody></table>';}
+
+  function renderMini(elid,wk,dkey){
+    if(!wk){el(elid).innerHTML='—';return;}
+    const cmp=wk.comparisons||{};
+    const rows=Object.keys(cmp).map(key=>{
+      const c=cmp[key]; const d=c[dkey];
+      if(!d||d==='—')return null;
+      const mag=Math.abs(parseFloat(d.replace(/[^0-9.-]/g,'')));
+      const m=METS.find(x=>x[0]===key);
+      return m?{key,lbl:m[1],fmt:m[2],col:m[3],d,mag,this:c.this}:null;
+    }).filter(Boolean).sort((a,b)=>b.mag-a.mag).slice(0,8);
+    if(!rows.length){el(elid).innerHTML='<span style="color:var(--muted)">No baseline yet</span>';return;}
+    el(elid).innerHTML=rows.map(r=>`<div class="metric-row">
+      <span><span class="dot" style="background:${r.col}"></span>${r.lbl}</span>
+      <span style="display:flex;align-items:center;gap:8px"><span>${fv(r.this,r.fmt)}</span>
+        <span class="${dclass(r.d)}" style="font-size:11.5px;min-width:54px;text-align:right">${r.d}</span></span></div>`).join('');}
+
+  const tmet=el('trend_met'), tbl=el('trend_bl');
+  tmet.innerHTML=METS.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join('');
+  tmet.value=METS[0][0];
+  function drawTrend(){
+    const key=tmet.value, blkey=tbl.value;
+    const m=METS.find(x=>x[0]===key)||METS[0]; const fmt=m[2], col=m[3];
+    const W=900,H=240,L=54,R=64,T=14,B=36;
+    const weeks=HIST.filter(w=>w[key]!=null).map(w=>({wk:w.week_key,v:w[key],label:w.date_range||w.week_key,n:w.n,season:w.season}));
+    if(!weeks.length){el('trend_svg').innerHTML='<text x="450" y="120" text-anchor="middle" font-size="13" fill="#9a9584">No data for this metric yet</text>';return;}
+    const vals=weeks.map(w=>w.v); let lo=Math.min(...vals),hi=Math.max(...vals);
+    let blv=null;
+    if(blkey==='annual'&&BL.annual)blv=BL.annual[key];
+    if(blkey==='season'&&BL.by_season){const sv=Object.values(BL.by_season).map(s=>s[key]).filter(v=>v!=null);blv=sv.length?sv.reduce((a,b)=>a+b,0)/sv.length:null;}
+    if(blv!=null){lo=Math.min(lo,blv);hi=Math.max(hi,blv);}
+    const pad=(hi-lo)*0.14||0.5, ylo=lo-pad, yhi=hi+pad;
+    const xi=i=>L+i*(W-L-R)/Math.max(weeks.length-1,1);
+    const y=v=>H-B-(v-ylo)/(yhi-ylo)*(H-T-B);
+    let g='';
+    if(blv!=null){const by=y(blv).toFixed(1);
+      g+=`<line x1="${L}" y1="${by}" x2="${W-R}" y2="${by}" stroke="${GOLD}" stroke-width="1.5" stroke-dasharray="5 3" opacity=".8"/>`;
+      g+=`<text x="${W-R+4}" y="${+by+3}" font-size="9.5" fill="${GOLD}" font-weight="700">${fv(blv,fmt)}</text>`;}
+    for(let i=0;i<=4;i++){const v=ylo+(yhi-ylo)*i/4,yy=y(v).toFixed(1);
+      g+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#e6ddc7"/>`;
+      g+=`<text x="${L-5}" y="${+yy+3}" text-anchor="end" font-size="9" fill="${GREY}">${fmt==='$'?'$'+v.toFixed(0):fmt==='n'?v.toFixed(0):v.toFixed(1)+'%'}</text>`;}
+    const path=weeks.map((w,i)=>`${i?'L':'M'}${xi(i).toFixed(1)},${y(w.v).toFixed(1)}`).join(' ');
+    const ay=y(ylo).toFixed(1);
+    g+=`<path d="${path} L${xi(weeks.length-1)},${ay} L${xi(0)},${ay} Z" fill="${col}" opacity=".10"/>`;
+    g+=`<path d="${path}" fill="none" stroke="${col}" stroke-width="2"/>`;
+    weeks.forEach((w,i)=>{g+=`<circle cx="${xi(i).toFixed(1)}" cy="${y(w.v).toFixed(1)}" r="4" fill="${col}" opacity=".9"/>`;
+      if(i%4===0||i===weeks.length-1){const p=w.wk.split('-W');
+        g+=`<text x="${xi(i).toFixed(1)}" y="${H-B+14}" text-anchor="middle" font-size="8.5" fill="${GREY}">W${p[1]}'${p[0].slice(2)}</text>`;}});
+    const svg=el('trend_svg'); svg.innerHTML=g;
+    svg.onmousemove=e=>{const rect=svg.getBoundingClientRect();const px=(e.clientX-rect.left)*W/rect.width;
+      const step=(W-L-R)/Math.max(weeks.length-1,1);const i=Math.max(0,Math.min(weeks.length-1,Math.round((px-L)/step)));
+      const w=weeks[i];el('trend_tip').innerHTML=`<b>${w.label}</b> · ${m[1]}: <b style="color:${col}">${fv(w.v,fmt)}</b> · ${w.n} checks · ${w.season}`;};}
+  tmet.onchange=drawTrend; tbl.onchange=drawTrend; drawTrend();
+
+  const hmet=el('hist_met');
+  hmet.innerHTML=METS.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join('');
+  hmet.value=METS[0][0];
+  function drawGrid(){
+    const key=hmet.value; const m=METS.find(x=>x[0]===key)||METS[0]; const fmt=m[2];
+    const weeks=HIST.filter(w=>w[key]!=null);
+    if(!weeks.length){el('hist_grid').innerHTML='<p style="color:var(--muted)">No history for this metric yet.</p>';return;}
+    const vals=weeks.map(w=>w[key]); const lo=Math.min(...vals),hi=Math.max(...vals);
+    const byYear={}; weeks.forEach(w=>{const yr=w.week_key.split('-W')[0];(byYear[yr]=byYear[yr]||[]).push(w);});
+    let t=`<table class="hist-table" style="width:max-content">`;
+    Object.keys(byYear).sort().forEach(yr=>{
+      t+=`<tr><td style="font-weight:700;background:var(--alt);white-space:nowrap;padding:5px 10px">${yr}</td>`;
+      byYear[yr].forEach(w=>{const v=w[key];const heat=(v-lo)/(hi-lo||1);
+        const bg=`rgba(47,71,52,${(0.06+heat*0.72).toFixed(2)})`;const fg=heat>0.55?'#fff':'var(--ink)';
+        const wn=w.week_key.split('-W')[1];const act=activeWk&&activeWk.week_key===w.week_key;
+        t+=`<td onclick="loadWeek('${w.week_key}')" title="${w.date_range||w.week_key}: ${fv(v,fmt)}"
+          style="background:${bg};color:${fg};cursor:pointer;${act?'outline:2px solid var(--gold);outline-offset:-2px':''}">
+          <div style="font-size:9px;opacity:.7">W${wn}</div><div style="font-weight:700">${fv(v,fmt)}</div></td>`;});
+      t+=`</tr>`;});
+    el('hist_grid').innerHTML=t+'</table>';}
+  hmet.onchange=drawGrid; drawGrid();
+
+  window.loadWeek=wk_key=>{const wk=HIST.find(w=>w.week_key===wk_key);
+    if(wk){activeWk=wk;wsel.value=HIST.indexOf(wk);renderAll(wk);drawGrid();window.scrollTo(0,0);}};
+  renderAll(LW);
+}
+init();
+</script>
