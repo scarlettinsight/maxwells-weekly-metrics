@@ -1,0 +1,169 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maxwell's · Complete Analytics</title>
+<style>
+:root{--hunt:#2F4734;--ox:#6B2227;--gold:#B08D2B;--parch:#F4EEE1;--ink:#1E1E1E;
+ --line:#d8cdb6;--card:#fbf7ee;--muted:#6f6a5c;--alt:#f3ede0;--blue:#3d6a7a;--clay:#a8632f;--sage:#6b8e6f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--parch);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:14px;line-height:1.45;padding-bottom:40px}
+h1,h2,h3{font-family:Georgia,serif}
+.top{background:var(--hunt);padding:16px 22px;position:sticky;top:0;z-index:20}
+.top b{font-family:Georgia;font-size:19px;color:#fff}
+.top span{font-size:12px;color:#adc4ad;margin-left:8px}
+.nav{background:var(--hunt);display:flex;gap:2px;overflow-x:auto;padding:0 14px 10px;position:sticky;top:52px;z-index:19}
+.nav button{background:none;border:none;color:#adc4ad;font:inherit;font-size:13px;padding:7px 12px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
+.nav button.on{color:#fff;border-bottom-color:var(--gold);font-weight:700}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px}
+h2.sec{font-size:20px;color:var(--hunt);border-bottom:2px solid var(--gold);padding-bottom:6px;margin:6px 0 4px}
+.lede{color:var(--muted);font-size:13px;margin:4px 0 16px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.tile .v{font-family:Georgia;font-size:26px;font-weight:700;color:var(--hunt)}
+.tile .l{font-size:11.5px;color:var(--muted);margin-top:3px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+.card-title{font-family:Georgia;font-weight:700;color:var(--hunt);margin:0 0 12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px}
+.bar-row .lab{width:150px;flex-shrink:0}.bar-row .lab small{color:var(--muted)}
+.bar-track{flex:1;background:var(--alt);border-radius:5px;height:20px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px}
+.bar-row .val{width:120px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--hunt);color:#f3efe3;padding:7px 10px;text-align:right;font-size:11.5px;position:sticky;top:96px}
+th:first-child{text-align:left}
+td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+td:first-child{text-align:left;font-weight:600}
+tr:nth-child(even) td{background:var(--alt)}
+.hl{background:#fff6ec;border-left:4px solid var(--gold);padding:6px 12px;margin:5px 0;font-size:13px;border-radius:0 8px 8px 0}
+.pill{display:inline-block;font-size:11px;color:var(--muted);background:var(--alt);border-radius:10px;padding:1px 8px;margin:2px 4px 0 0}
+svg{display:block;width:100%;height:auto}
+@media(max-width:680px){.two{grid-template-columns:1fr}.bar-row .lab{width:110px}.bar-row .val{width:96px}}
+</style>
+<div class="top"><b>The Wine Kitchen &middot;&nbsp;</b><b>Maxwell's Burgers &amp; Shakes</b><span id="win"></span></div>
+<div class="nav" id="nav"></div>
+<div class="wrap" id="root"></div>
+<script>window.__A__={"overview":{"net":949088,"orders":33780,"guests":37354,"avg_check":28.1,"per_guest":25.41,"clean_checks":33214,"guests_per_check":1.11,"window":"2025-07 \u2013 2026-06"},"catmix":[{"name":"Food","net":998441,"pct":105.2},{"name":"Beer","net":17554,"pct":1.8},{"name":"Liquor","net":14672,"pct":1.5},{"name":"No Sales Category Assigned","net":9567,"pct":1.0},{"name":"WIne","net":2523,"pct":0.3},{"name":"Non-Grat Svc Charges","net":168,"pct":0.0}],"center":[{"name":"In-store counter","net":831908,"pct":87.7},{"name":"Online Ordering","net":153244,"pct":16.1},{"name":"Tenth Ward","net":42994,"pct":4.5},{"name":"Dining Room","net":13224,"pct":1.4},{"name":"Takeout","net":1546,"pct":0.2}],"byday":[{"day":"Mon","avg_check":26.76,"orders":3549,"net":94982,"guests":4075},{"day":"Tue","avg_check":25.62,"orders":3757,"net":96262,"guests":4344},{"day":"Wed","avg_check":25.45,"orders":4238,"net":107846,"guests":4711},{"day":"Thu","avg_check":27.1,"orders":4656,"net":126186,"guests":5158},{"day":"Fri","avg_check":28.72,"orders":6703,"net":192528,"guests":7293},{"day":"Sat","avg_check":29.96,"orders":8879,"net":265989,"guests":9436},{"day":"Sun","avg_check":30.34,"orders":5244,"net":159122,"guests":5614}],"daypart":[{"part":"Lunch","orders":18105,"net":490126,"avg_check":27.07},{"part":"Dinner","orders":14865,"net":445285,"avg_check":29.96}],"hourly":[{"hr":11,"checks":1645,"net":48083,"avg_check":29.23,"checks_per_wk":31.0,"net_per_wk":907},{"hr":12,"checks":4096,"net":116455,"avg_check":28.43,"checks_per_wk":77.3,"net_per_wk":2197},{"hr":13,"checks":3606,"net":101091,"avg_check":28.03,"checks_per_wk":68.0,"net_per_wk":1907},{"hr":14,"checks":3036,"net":80505,"avg_check":26.52,"checks_per_wk":57.3,"net_per_wk":1519},{"hr":15,"checks":2839,"net":69329,"avg_check":24.42,"checks_per_wk":53.6,"net_per_wk":1308},{"hr":16,"checks":3018,"net":82686,"avg_check":27.4,"checks_per_wk":56.9,"net_per_wk":1560},{"hr":17,"checks":4272,"net":136018,"avg_check":31.84,"checks_per_wk":80.6,"net_per_wk":2566},{"hr":18,"checks":4757,"net":146516,"avg_check":30.8,"checks_per_wk":89.8,"net_per_wk":2764},{"hr":19,"checks":3734,"net":105348,"avg_check":28.21,"checks_per_wk":70.5,"net_per_wk":1988},{"hr":20,"checks":2041,"net":50182,"avg_check":24.59,"checks_per_wk":38.5,"net_per_wk":947},{"hr":21,"checks":147,"net":3461,"avg_check":23.55,"checks_per_wk":2.8,"net_per_wk":65}],"comp":[{"key":"burger","label":"Burger","pen":69.8,"top_items":["Build Your Own Burger  (Includes choice of side)","The Maxx Stack (Includes choice of side)","Steakhouse Burger (Includes choice of side)"]},{"key":"shake","label":"Shake","pen":28.7,"top_items":["Cookies & Cream Shake","Chocolate Shake","Peanut Butter Cup Shake"]},{"key":"side","label":"Side","pen":17.8,"top_items":["MAX Fries","Mac & cheese","Sweet Potato Tots"]},{"key":"hotdog","label":"Hot dog","pen":9.7,"top_items":["Build Your Own Hot Dog","Chili Cheese Dog","Frederick Dog"]},{"key":"nuggets","label":"Nuggets","pen":6.0,"top_items":["6 Piece (Comes with choice of side)","10 Piece (Comes with choice of side)","4 Piece (Comes with choice of side)"]},{"key":"kids","label":"Kids meal","pen":11.9,"top_items":["Kids Burger","House-Made Kids Nugget Meal","Grilled Cheese Sandwich"]},{"key":"softdrink","label":"Fountain soda","pen":21.8,"top_items":["Pepsi Cola","Pepsi Cola Zero","Stubborn Black Cherry"]},{"key":"alcohol_any","label":"Any alcohol","pen":9.8,"top_items":["Miller High Life 12oz","Bourbon Bomb","Granny's Creamsicle"]},{"key":"beer_any","label":"Beer","pen":6.6,"top_items":["Miller High Life 12oz","Miller High Life","Attaboy Wowdeedee (West Coast Pilsner-5.7%)"]},{"key":"cocktail","label":"Cocktail/spirit","pen":3.2,"top_items":["Bourbon Bomb","Granny's Creamsicle","Dirty Banana"]}],"top_items":{"by_pen":[{"item":"Build Your Own Burger  (Includes choice of side)","pct":21.3},{"item":"The Maxx Stack (Includes choice of side)","pct":20.4},{"item":"Pepsi Cola","pct":18.7},{"item":"Steakhouse Burger (Includes choice of side)","pct":13.3},{"item":"MAX Fries","pct":8.7},{"item":"Kids Burger","pct":8.2},{"item":"Cookies & Cream Shake","pct":7.8},{"item":"Wagyu Burger (Includes choice of side)","pct":7.6},{"item":"Mac & cheese","pct":7.1},{"item":"Crispy Chicken Sandwich (Includes choice of side)","pct":6.7},{"item":"Build Your Own Burger.","pct":6.3},{"item":"Chocolate Shake","pct":5.2},{"item":"Bacon Jam B.L.T (Includes choice of side)","pct":4.6},{"item":"Beet Burger (Includes choice of side)","pct":4.5},{"item":"Peanut Butter Cup Shake","pct":4.3},{"item":"Strawberry Shake","pct":3.8},{"item":"6 Piece (Comes with choice of side)","pct":3.6},{"item":"Vanilla Shake","pct":3.4},{"item":"Max Fish-O-Filet","pct":3.4},{"item":"House-Made Kids Nugget Meal","pct":3.2}],"by_net":[{"item":"Build Your Own Burger  (Includes choice of side)","net":159852.0},{"item":"The Maxx Stack (Includes choice of side)","net":118454.0},{"item":"Steakhouse Burger (Includes choice of side)","net":80464.0},{"item":"Wagyu Burger (Includes choice of side)","net":55200.0},{"item":"Build Your Own Burger.","net":46045.0},{"item":"Crispy Chicken Sandwich (Includes choice of side)","net":35047.0},{"item":"Kids Burger","net":30407.0},{"item":"Bacon Jam B.L.T (Includes choice of side)","net":25924.0},{"item":"Beet Burger (Includes choice of side)","net":25082.0},{"item":"Pepsi Cola","net":21884.0},{"item":"Max Fish-O-Filet","net":20260.0},{"item":"Cookies & Cream Shake","net":19734.0},{"item":"Mac & cheese","net":17265.0},{"item":"Chocolate Shake","net":12998.0},{"item":"MAX Fries","net":12298.0},{"item":"6 Piece (Comes with choice of side)","net":11849.0},{"item":"Crispy Brussels Sprouts Salad","net":10772.0},{"item":"Peanut Butter Cup Shake","net":10455.0},{"item":"House-Made Kids Nugget Meal","net":9906.0},{"item":"Strawberry Shake","net":9387.0}]},"revmix":{"food_pct":95.7,"wine_pct":0.2,"liq_pct":1.4,"beer_pct":1.6},"annual_avg_check":28.36,"annual_covers":704.8,"name":"Maxwell's Burgers & Shakes","weeks":53};</script>
+<script>
+const A=window.__A__, el=id=>document.getElementById(id);
+const $=(t,a={},...c)=>{const e=document.createElement(t);for(const k in a){if(k==='html')e.innerHTML=a[k];else e.setAttribute(k,a[k]);}c.forEach(x=>e.append(x));return e;};
+const money=v=>'$'+Math.round(v).toLocaleString();
+const money2=v=>'$'+(+v).toFixed(2);
+const hlab=h=>{const ap=h<12?'am':'pm';let hh=h%12;if(hh===0)hh=12;return hh+ap;};
+el('win').textContent='Complete Analytics · '+A.overview.window;
+
+const TABS=[['ov','Overview'],['ac','Avg Check'],['co','Composition'],['td','Time of Day'],['ti','Top Items']];
+let cur='ov';
+const nav=el('nav');
+TABS.forEach(([id,lbl])=>{const b=$('button',{},document.createTextNode(lbl));b.onclick=()=>{cur=id;render();};b.dataset.id=id;nav.append(b);});
+
+function hbars(rows, val, color, fmt, lab){ // rows:[{lab,val,sub}]
+  const max=Math.max(...rows.map(val));
+  const wrap=$('div');
+  rows.forEach(r=>{const v=val(r);
+    wrap.append($('div',{class:'bar-row'},
+      $('div',{class:'lab',html:lab(r)}),
+      $('div',{class:'bar-track'},$('div',{class:'bar-fill',style:`width:${max?v/max*100:0}%;background:${typeof color==='function'?color(r):color}`})),
+      $('div',{class:'val',html:fmt(r)})));});
+  return wrap;
+}
+
+function render(){
+  [...nav.children].forEach(b=>b.classList.toggle('on',b.dataset.id===cur));
+  const R=el('root'); R.innerHTML='';
+  if(cur==='ov')ov(R); else if(cur==='ac')ac(R); else if(cur==='co')co(R); else if(cur==='td')td(R); else ti(R);
+  window.scrollTo(0,0);
+}
+
+function ov(R){
+  const o=A.overview;
+  R.append($('h2',{class:'sec'},document.createTextNode('Business at a Glance')));
+  R.append($('p',{class:'lede'},document.createTextNode(`${o.clean_checks.toLocaleString()} dine-in checks · ${A.weeks} weeks · ${o.window} · counter service (self-seating)`)));
+  const tiles=$('div',{class:'tiles'});
+  [[money(o.net),'Net sales'],[money2(o.avg_check),'Avg check'],[o.orders.toLocaleString(),'Orders'],
+   [o.guests.toLocaleString(),'Guests (covers)'],[money2(o.per_guest),'Net / guest'],[o.guests_per_check,'Guests / check']]
+   .forEach(([v,l])=>tiles.append($('div',{class:'tile'},$('div',{class:'v'},document.createTextNode(v)),$('div',{class:'l'},document.createTextNode(l)))));
+  R.append(tiles);
+  const two=$('div',{class:'two'});
+  const c1=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Revenue by category')));
+  c1.append(hbars(A.catmix,r=>r.net,r=>({Food:'var(--hunt)',Beer:'var(--gold)',Liquor:'var(--clay)',WIne:'var(--ox)',Wine:'var(--ox)'}[r.name]||'var(--sage)'),
+    r=>`${money(r.net)} · ${r.pct}%`, r=>r.name));
+  const c2=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Revenue by center')));
+  c2.append(hbars(A.center,r=>r.net,'var(--blue)',r=>`${money(r.net)} · ${r.pct}%`,r=>r.name));
+  two.append(c1,c2); R.append(two);
+  const f=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Headline findings')));
+  const burg=A.comp.find(x=>x.key==='burger'),shk=A.comp.find(x=>x.key==='shake'),soda=A.comp.find(x=>x.key==='softdrink'),alc=A.comp.find(x=>x.key==='alcohol_any');
+  const lun=A.daypart.find(x=>x.part==='Lunch'),din=A.daypart.find(x=>x.part==='Dinner');
+  [`Average check is <b>${money2(o.avg_check)}</b> across ${o.orders.toLocaleString()} orders; guests spend <b>${money2(o.per_guest)}</b> each at <b>${o.guests_per_check}</b> guests per check.`,
+   `<b>${burg.pen}%</b> of checks include a burger and <b>${shk.pen}%</b> add a shake — the shake is the single biggest upsell lever.`,
+   `<b>Lunch outsells dinner</b> on volume (${lun.orders.toLocaleString()} vs ${din.orders.toLocaleString()} orders), but dinner rings higher (${money2(din.avg_check)} vs ${money2(lun.avg_check)}).`,
+   `Fountain sodas attach on <b>${soda.pen}%</b> of checks; any alcohol on <b>${alc.pen}%</b> — a modest but real bar business.`
+  ].forEach(h=>f.append($('div',{class:'hl',html:h}))); R.append(f);
+}
+
+function ac(R){
+  R.append($('h2',{class:'sec'},document.createTextNode('Average Check')));
+  R.append($('p',{class:'lede'},document.createTextNode('By day of week and by daypart (Toast exact net ÷ orders).')));
+  const two=$('div',{class:'two'});
+  const c1=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Avg check by day of week')));
+  c1.append(hbars(A.byday,r=>r.avg_check,r=>['Fri','Sat','Sun'].includes(r.day)?'var(--ox)':'var(--hunt)',
+    r=>`${money2(r.avg_check)}`,r=>`${r.day} <small>${r.orders.toLocaleString()} ord</small>`));
+  const c2=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Daypart')));
+  A.daypart.forEach(d=>c2.append($('div',{class:'hl',html:`<b>${d.part}</b> — ${money2(d.avg_check)} avg check · ${d.orders.toLocaleString()} orders · ${money(d.net)} net`})));
+  c2.append($('p',{class:'lede',html:'Maxwell’s is a <b>lunch-led</b> counter — lunch drives the order volume, dinner the higher ticket.'}));
+  two.append(c1,c2); R.append(two);
+}
+
+function co(R){
+  R.append($('h2',{class:'sec'},document.createTextNode('Composition & Attach')));
+  R.append($('p',{class:'lede'},document.createTextNode('% of checks that include each category, with the top items driving it.')));
+  const c=$('div',{class:'card'});
+  const COL={burger:'var(--hunt)',shake:'var(--clay)',side:'var(--sage)',hotdog:'var(--clay)',nuggets:'var(--gold)',kids:'var(--blue)',softdrink:'var(--sage)',alcohol_any:'var(--ox)',beer_any:'var(--gold)',cocktail:'var(--gold)'};
+  c.append(hbars(A.comp,r=>r.pen,r=>COL[r.key]||'var(--hunt)',r=>`${r.pen}%`,r=>r.label));
+  R.append(c);
+  const d=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Top items in each category')));
+  A.comp.filter(x=>x.top_items.length).forEach(x=>{
+    const row=$('div',{style:'margin:8px 0;font-size:13px'});
+    row.append($('b',{},document.createTextNode(x.label+' — ')));
+    x.top_items.forEach(t=>row.append($('span',{class:'pill'},document.createTextNode(t.replace(/\s*\(Includes choice of side\)/,'')))));
+    d.append(row);
+  }); R.append(d);
+}
+
+function td(R){
+  R.append($('h2',{class:'sec'},document.createTextNode('Time of Day')));
+  R.append($('p',{class:'lede'},document.createTextNode('Checks and modeled net sales by opening hour. The lunch block (12–1pm) is the peak.')));
+  // chart: net per week by hour
+  const H=A.hourly, W=900, HH=240, L=44, Rp=12, T=10, B=28, maxn=Math.max(...H.map(h=>h.net_per_wk));
+  const bw=(W-L-Rp)/H.length;
+  let g='';
+  for(let i=0;i<=4;i++){const y=(T+(HH-T-B)*i/4).toFixed(1);const v=maxn*(1-i/4);
+    g+=`<line x1="${L}" y1="${y}" x2="${W-Rp}" y2="${y}" stroke="#e6ddc7"/><text x="${L-5}" y="${+y+3}" text-anchor="end" font-size="9" fill="#9a9584">$${Math.round(v).toLocaleString()}</text>`;}
+  H.forEach((h,i)=>{const bh=(HH-T-B)*h.net_per_wk/maxn;const x=L+i*bw+bw*0.15;const y=HH-B-bh;
+    const peak=h.net_per_wk===maxn;
+    g+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw*0.7).toFixed(1)}" height="${bh.toFixed(1)}" fill="${peak?'var(--ox)':'var(--hunt)'}" rx="2"><title>${hlab(h.hr)}: ${money(h.net_per_wk)}/wk · ${h.checks_per_wk} checks/wk</title></rect>`;
+    g+=`<text x="${(x+bw*0.35).toFixed(1)}" y="${HH-B+13}" text-anchor="middle" font-size="9.5" fill="#6f6a5c">${hlab(h.hr)}</text>`;});
+  const card=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Net sales per week by hour')));
+  card.append($('div',{html:`<svg viewBox="0 0 ${W} ${HH}">${g}</svg>`})); R.append(card);
+  // hour-by-hour TABLE (explicit per the operator's request)
+  const t=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('Hour-by-hour sales breakdown')));
+  let rows='<table><thead><tr><th>Hour</th><th>Checks / wk</th><th>Avg check</th><th>Net / wk</th><th>Checks (yr)</th><th>Net (yr)</th></tr></thead><tbody>';
+  H.forEach(h=>{rows+=`<tr><td>${hlab(h.hr)}</td><td>${h.checks_per_wk}</td><td>${money2(h.avg_check)}</td><td>${money(h.net_per_wk)}</td><td>${h.checks.toLocaleString()}</td><td>${money(h.net)}</td></tr>`;});
+  const tot=H.reduce((a,h)=>({c:a.c+h.checks,n:a.n+h.net}),{c:0,n:0});
+  rows+=`</tbody><tfoot><tr style="font-weight:700"><td>Total</td><td>${Math.round(tot.c/A.weeks)}</td><td>${money2(tot.n/tot.c)}</td><td>${money(tot.n/A.weeks)}</td><td>${tot.c.toLocaleString()}</td><td>${money(tot.n)}</td></tr></tfoot></table>`;
+  t.append($('div',{style:'overflow-x:auto',html:rows})); R.append(t);
+}
+
+function ti(R){
+  R.append($('h2',{class:'sec'},document.createTextNode('Top Items')));
+  R.append($('p',{class:'lede'},document.createTextNode('Left: how often an item appears on a check (penetration). Right: total modeled net over the year.')));
+  const two=$('div',{class:'two'});
+  const clean=s=>s.replace(/\s*\(Includes choice of side\)/,'').replace(/\s*\.$/,'');
+  const c1=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('By check penetration')));
+  c1.append(hbars(A.top_items.by_pen.slice(0,15),r=>r.pct,'var(--hunt)',r=>`${r.pct}%`,r=>clean(r.item)));
+  const c2=$('div',{class:'card'},$('div',{class:'card-title'},document.createTextNode('By net sales (modeled)')));
+  c2.append(hbars(A.top_items.by_net.slice(0,15),r=>r.net,'var(--gold)',r=>money(r.net),r=>clean(r.item)));
+  two.append(c1,c2); R.append(two);
+}
+render();
+</script>
