@@ -132,7 +132,7 @@ function co(R){
 
 function td(R){
   R.append($('h2',{class:'sec'},document.createTextNode('Time of Day')));
-  R.append($('p',{class:'lede'},document.createTextNode('Checks and modeled net sales by opening hour. The lunch block (12–1pm) is the peak.')));
+  R.append($('p',{class:'lede'},document.createTextNode('Checks and modeled net sales by opening hour. Lunch (noon–1pm) draws the most orders; net sales peak in the early-dinner window (5–6pm).')));
   // chart: net per week by hour
   const H=A.hourly, W=900, HH=240, L=44, Rp=12, T=10, B=28, maxn=Math.max(...H.map(h=>h.net_per_wk));
   const bw=(W-L-Rp)/H.length;
