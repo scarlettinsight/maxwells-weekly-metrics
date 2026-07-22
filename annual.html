@@ -73,7 +73,7 @@ svg{display:block}
 @media(max-width:700px){.two,.three{grid-template-columns:1fr}.kpi.c5,.kpi.c4{grid-template-columns:repeat(2,1fr)}}
 </style>
 <div class="top">
-  <div class="brand"><b>The Maxwell's Burgers & Shakes</b><span>Complete Check &amp; Reservation Analytics · Jun 2025 – Jun 2026 · <a href="/" style="color:#B08D2B;text-decoration:none">← Weekly scorecard</a></span></div>
+  <div class="brand"><b>The Maxwell's Burgers & Shakes</b><span>Complete Check Analytics · Jun 2025 – Jun 2026 · <a href="/" style="color:#B08D2B;text-decoration:none">← Weekly scorecard</a></span></div>
   <div class="tabs"><button class="tab on" data-t="ov">Overview</button><button class="tab" data-t="ac">Average Check</button><button class="tab" data-t="rev">Revenue & Mix</button><button class="tab" data-t="comp">Composition</button><button class="tab" data-t="des">Dessert</button><button class="tab" data-t="tod">Time of Day</button><button class="tab" data-t="bask">The Check (117 Slots)</button><button class="tab" data-t="ps" style="display:none">Party Size</button><button class="tab" data-t="pscmp" style="display:none">Party Size × Slot</button><button class="tab" data-t="sr" style="display:none">Reservations</button></div>
 </div>
 <div class="wrap"><section class="pane on" id="pane_ov"></section><section class="pane" id="pane_ac"></section><section class="pane" id="pane_rev"></section><section class="pane" id="pane_comp"></section><section class="pane" id="pane_des"></section><section class="pane" id="pane_tod"></section><section class="pane" id="pane_bask"></section><section class="pane" id="pane_ps"></section><section class="pane" id="pane_pscmp"></section><section class="pane" id="pane_sr"></section></div>
@@ -94,7 +94,7 @@ const money=v=>"$"+Math.round(v).toLocaleString();
 const pct=v=>v==null?"—":(v*100).toFixed(0)+"%";
 const fmt_ps=(v,i)=>i===0?money(v):pct(v);
 
-function hbars(elid,rows,fmtFn,maxv){
+function hbars(elid,rows,fmtFn,maxv){ if(!el(elid))return;
   const max=maxv||Math.max(...rows.map(r=>r.v||0),0.01);
   el(elid).innerHTML=rows.map(r=>{
     const w=Math.round((r.v||0)/max*100);
@@ -147,8 +147,8 @@ ${[["Net sales",money(t.net)],["Orders",t.orders.toLocaleString()],["Guests",t.g
   .map(k=>`<div class="kbox"><div class="k">${k[1]}</div><div class="l">${k[0]}</div></div>`).join('')}
 </div>
 <div class="two"><div class="card"><h3 class="blk" style="margin-top:0">Revenue by category</h3><div id="ov_cat"></div></div>
-<div class="card"><h3 class="blk" style="margin-top:0">Revenue by center</h3><div id="ov_rc"></div></div></div>
-<div class="card"><h3 class="blk" style="margin-top:0">Headline findings</h3><ul class="di"><li>Wine is <b>0.2% of net sales</b>; dinner avg check $30 vs lunch $27.</li><li>Clean average check <b>$28.10</b> per order across 33,780 orders.</li><li>Wine attaches on <b>—% of checks</b> (glass —%, flight —%).</li><li><b>71.8% of tables take no dessert</b> — the upsell opening.</li></ul></div>
+</div>
+<div class="card"><h3 class="blk" style="margin-top:0">Headline findings</h3><ul class="di"><li><b>Food is 95.7% of net sales</b>; dinner avg check $30 vs lunch $27.</li><li>Clean average check <b>$28.10</b> per order across 33,780 orders; 2.66 items/check.</li><li>Burgers on <b>68.8% of checks</b>, shakes <b>28.2%</b>, sides/fries <b>17.5%</b>.</li><li>Alcohol attaches on <b>9.7% of checks</b> (beer 6.5%, cocktail 3.1%); fountain soda 21.5%.</li><li>Shakes (the dessert play) attach on <b>28.2% of checks</b>.</li></ul></div>
 <div class="note"><b>Check basis:</b> ${m.clean_checks.toLocaleString()} dine-in checks (${m.staff_excl.toLocaleString()} staff/employee-discount + ${m.retail_excl.toLocaleString()} retail/gift excluded). A to-go bottle on a dine-in check is always retained. Clean avg check $${m.clean_avg_check} vs raw $${m.raw_avg_check}.</div>`;
 el('pane_ov').innerHTML=h;
 const cats=D.cat_order;
